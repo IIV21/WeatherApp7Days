@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp7Days.WeatherFor7Days">
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding TimeZone}"
+                   HorizontalOptions="Center"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   TextColor="Orange"/>
+            <CollectionView ItemsSource="{Binding DailyWeather}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                        <Frame BackgroundColor="DarkGoldenrod">
+                        <Grid Padding="10" BackgroundColor="RoyalBlue">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                            
+                        <Image Source="{Binding Weather[0].IconURL}"/>
+
+                        <Label Grid.Column="2"
+                         Text="{Binding Temp.TempC, StringFormat='T = {0:F2}&#186;C'}"
+                         FontAttributes="Italic" />
+
+                        <Label Grid.Column="1"
+                       Text="{Binding Weather[0].Main}"
+                       FontAttributes="Bold"/>
+                            
+                        <Label Grid.Row="1"
+                       Grid.Column="1"
+                       Text="{Binding Weather[0].Description}"
+                       FontAttributes="Italic"
+                       VerticalOptions="End" />
+                            
+                        <Label Grid.Row="0"
+                       Grid.Column="2"
+                       Text="{Binding Weather[0].Id}"
+                       FontAttributes="Italic"
+                       VerticalOptions="End" />
+                           
+
+                        </Grid>
+                        </Frame>
+                    </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+            <Button Text="GetCurrentLocation"
+                    BackgroundColor="Orange"
+                    Command="{Binding CurrentLocation}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
